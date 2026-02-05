@@ -57,8 +57,8 @@ Java Migration Agent is a library for automated code migration from Java 8 to Ja
 It provides multiple agent strategies for migration:
 - **Baseline**: Direct LLM-based migration
 - **PE (Prompt Engineering)**: Baseline with enhanced prompts for dependency updates
-- **Hybrid**: Pre-processes dependencies before LLM migration
 - **RAG**: Uses retrieval-augmented generation for dependency version lookup
+- **Hybrid**: Pre-processes dependencies before LLM migration
 
 The agent relies on the [MigrationBench](https://github.com/amazon-science/MigrationBench) package for evaluation.
 
@@ -114,8 +114,8 @@ uv pip install -e .
 |------------|-------------|
 | `baseline` | Direct LLM migration with `mvn clean verify` |
 | `pe`       | Baseline with prompt engineering for dependency updates |
-| `hybrid`   | Pre-processes pom.xml dependencies before LLM migration |
 | `rag`      | Uses dependency version lookup tool for migration |
+| `hybrid`   | Pre-processes pom.xml dependencies before LLM migration |
 
 ### 4.2 Running Migration
 
@@ -135,7 +135,7 @@ python -m java_migration_agent \
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `--agent-type` | (required) | Agent type: `baseline`, `pe`, `hybrid`, or `rag` |
+| `--agent-type` | (required) | Agent type: `baseline`, `pe`, `rag`, or `hybrid` |
 | `--exp-id` | (required) | Experiment identifier for organizing results |
 | `--hf-dataset` | `AmazonScience/migration-bench-java-selected` | HuggingFace dataset name |
 | `--model-id` | `global.anthropic.claude-sonnet-4-5-20250929-v1:0` | Bedrock model ID |
