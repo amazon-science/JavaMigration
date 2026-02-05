@@ -12,7 +12,7 @@ from packaging.version import Version
 
 from self_debug.common import utils
 
-DEPENDENCY_VERSION = Path(__file__).parent.parent / "reference/dependency_version.json"
+DEPENDENCY_VERSION = Path(__file__).parent.parent / "data/dependency_version.json"
 
 
 # pylint: disable=invalid-name

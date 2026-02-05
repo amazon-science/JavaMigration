@@ -1,0 +1,38 @@
+[project]
+name = "java-migration-agent"
+version = "0.1.0"
+description = "Java Migration Agent with LLM-based migration capabilities"
+readme = "README.md"
+requires-python = ">=3.8"
+
+dependencies = [
+    # Core dependencies
+    "toml>=0.10.2",
+    "packaging>=21.0",
+    "boto3>=1.40.41",
+
+    # Strands framework for LLM agents
+    "strands-agents[openai]",
+    "strands-agents-tools==0.2.9",
+
+    # HuggingFace datasets
+    "datasets>=2.14.0",
+    "huggingface-hub>=0.16.0",
+
+    # Evaluation from migration-bench
+    "migrationbench@git+https://github.com/amazon-science/MigrationBench.git",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/java_migration_agent"]
+
+[tool.uv]
+# UV-specific configuration
+index-url = "https://pypi.org/simple"

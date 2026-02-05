@@ -13,8 +13,8 @@
       </a>
     </td>
     <td style="padding: 0;">
-      <a href="https://github.com/amazon-science/SDFeedback">
-        <img src="https://img.shields.io/badge/SDFeedback-000000?style=flatten&logo=github&logoColor=white" alt="SDFeedback (GitHub)">
+      <a href="https://github.com/amazon-science/JavaMigration">
+        <img src="https://img.shields.io/badge/JavaMigration-000000?style=flatten&logo=github&logoColor=white" alt="JavaMigration (GitHub)">
       </a>
     </td>
     <td style="padding: 0;">
@@ -30,11 +30,6 @@
     <td style="padding: 0; vertical-align: middle;">
       <a href="https://huggingface.co/datasets/AmazonScience/migration-bench-java-selected">
         <img src="https://img.shields.io/badge/-🤗 java--selected-8a98ff?style=flat&labelColor" alt="java-selected">
-      </a>
-    </td>
-    <td style="padding: 0; vertical-align: middle;">
-      <a href="https://huggingface.co/datasets/AmazonScience/migration-bench-java-utg">
-        <img src="https://img.shields.io/badge/-🤗 java--utg-8a98ff?style=flat&labelColor" alt="java-utg">
       </a>
     </td>
   </tr>
@@ -142,6 +137,7 @@ Java version: 17.0.15, vendor: Amazon.com Inc., runtime: /usr/lib/jvm/java-17-am
 Default locale: en_US, platform encoding: UTF-8
 OS name: "linux", version: "5.10.236-208.928.amzn2int.x86_64", arch: "amd64", family: "unix"
 ```
+If you haven't done it yet, follow the instructions in [MigrationBench](https://github.com/amazon-science/MigrationBench) to install Maven.
 
 ```
 # conda (Optional)
@@ -149,23 +145,37 @@ $ conda --version
 conda 25.1.1
 ```
 
-#### 3.1.2 Install [MigrationBench](https://github.com/amazon-science/MigrationBench) and [SDFeedback](https://github.com/amazon-science/SDFeedback)
+#### 3.1.2 Install [SDFeedback](https://github.com/amazon-science/SDFeedback)
 
-```
-cd ~
-git clone https://github.com/amazon-science/MigrationBench.git
+**Option A: Using uv (Recommended)**
+
+```bash
 git clone https://github.com/amazon-science/SDFeedback.git
+cd SDFeedback
 
-# They're optional if one doesn't need a conda env
-# export CONDA_ENV=sd-feedback
-# conda create -n $CONDA_ENV python=3.9
-# conda activate $CONDA_ENV
+# Create and activate virtual environment with uv
+uv venv --python 3.9
+source .venv/bin/activate
 
-cd ~/MigrationBench
-pip install -r requirements.txt -e .
+# Install package (MigrationBench is installed automatically as a dependency)
+uv pip install -e .
 
-cd ~/SDFeedback
-pip install -r requirements.txt -e .
+# Or with dev dependencies
+uv pip install -e ".[dev]"
+```
+
+**Option B: Using conda/pip**
+
+```bash
+git clone https://github.com/amazon-science/SDFeedback.git
+cd SDFeedback
+
+# Optional: create a conda env
+# conda create -n sd-feedback python=3.9
+# conda activate sd-feedback
+
+# Install package (MigrationBench is installed automatically as a dependency)
+pip install -e .
 ```
 
 #### 3.1.3 Local Run

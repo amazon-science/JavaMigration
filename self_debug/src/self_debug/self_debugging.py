@@ -54,7 +54,6 @@ ROOT_DIR = "root_dir"
 PROJECT = "project"
 SOURCE_BRANCH = "source_branch"
 
-VALIDATION_PATH = os.path.join(Path(__file__).parent, "reference/validate.sh")
 DEBUG_TIMEOUT = 1.5 * 60 * 60
 
 
@@ -250,7 +249,6 @@ class SelfDebugging:
         # {error_code: {error_msg: list($FIND_REPLACE)}}: The list is dedupped/ essentially a set.
         self.examples_by_code = defaultdict(lambda: defaultdict(list))
         self.traj = trajectory_pb2.Trajectory()
-        self.eval_cmd = f"cp {VALIDATION_PATH} {self.repo.root_dir} && cd {self.repo.root_dir} && bash ./validate.sh && rm validate.sh"
         self.max_migration = max_migration
         self.enable_reflection = enable_reflection
         self.show_deprecation_cmd = "mvn clean compile -Dmaven.compiler.showDeprecation=true -Dmaven.compiler.showWarnings=true"
@@ -592,19 +590,7 @@ class SelfDebugging:
                     )
                 break
 
-        # validate class file is of version 61
         java_job = self.config.builder.HasField("maven_builder")
-        if success and java_job:
-            logging.info("Migration finished. Evaluating...")
-            cmd_data = utils.do_run_command(self.eval_cmd)
-            logging.info(cmd_data.stdout)
-            if cmd_data.return_code != 0:
-                logging.warning(
-                    "Migration failed and it's inconsistent with SD reporetd success: `%s`.",
-                    self.repo.root_dir,
-                )
-                success = False
-
         # Final eval for success
         final_success = success
         if java_job:
