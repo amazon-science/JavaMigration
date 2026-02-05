@@ -46,6 +46,10 @@ LLM-based agent library for automated Java 8 to Java 17 migration, built on the 
 ### [self_debug](./self_debug)
 SDFeedback implementation for code migration with LLMs using self-debugging feedback. Includes both single-job and batch processing capabilities with AWS EMRS support.
 
+## Data
+
+Agent trajectories and execution results are stored in the `data/` folder.
+
 ## Resources
 
 - [MigrationBench (Hugging Face)](https://huggingface.co/collections/AmazonScience/migrationbench-68125452fc21a4564b92b6c3)
