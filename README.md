@@ -1,4 +1,4 @@
-# JavaMigration
+# ☕ JavaMigration
 <table>
   <tr>
     <td style="padding: 0;">
@@ -34,27 +34,27 @@
   </tr>
 </table>
 
-Repository for automated Java code migration research, part of the [MigrationBench](https://huggingface.co/collections/AmazonScience/migrationbench-68125452fc21a4564b92b6c3) project.
+🚀 Repository for automated Java code migration research, part of the [MigrationBench](https://huggingface.co/collections/AmazonScience/migrationbench-68125452fc21a4564b92b6c3) project.
 
-## Packages
+## 📦 Packages
 
 This repository contains two main packages for Java code migration:
 
-### [java_migration_agent](./java_migration_agent)
+### 🤖 [java_migration_agent](./java_migration_agent)
 LLM-based agent library for automated Java 8 to Java 17 migration, built on the [Strands Agents](https://strandsagents.com/latest/) framework. Supports multiple migration strategies including baseline, PE (prompt engineering), RAG, and hybrid approaches.
 
-### [self_debug](./self_debug)
+### 🔧 [self_debug](./self_debug)
 SDFeedback implementation for code migration with LLMs using self-debugging feedback. Includes both single-job and batch processing capabilities with AWS EMRS support.
 
-## Data
+## 📊 Data
 
 Agent trajectories and execution results are stored in the `data/` folder.
 
-## Resources
+## 🔗 Resources
 
-- [MigrationBench (Hugging Face)](https://huggingface.co/collections/AmazonScience/migrationbench-68125452fc21a4564b92b6c3)
-- [MigrationBench (GitHub)](https://github.com/amazon-science/MigrationBench)
-- [arXiv Paper](https://arxiv.org/abs/2505.09569)
+- 🤗 [MigrationBench (Hugging Face)](https://huggingface.co/collections/AmazonScience/migrationbench-68125452fc21a4564b92b6c3)
+- 💻 [MigrationBench (GitHub)](https://github.com/amazon-science/MigrationBench)
+- 📄 [arXiv Paper](https://arxiv.org/abs/2505.09569)
 
 ## 📚 Citation
 
