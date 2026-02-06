@@ -1,4 +1,4 @@
-# SDFeedback
+# JavaMigration - SDFeedback
 
 <table>
   <tr>
@@ -44,12 +44,12 @@ markdown-toc -i README.md
 
 - [1. 📖 Overview](#1--overview)
   * [1.1 MigrationBench: Datasets and Evaluation Framework](#11-migrationbench-datasets-and-evaluation-framework)
-  * [1.2 SDFeedback: Migration with LLMs](#12-sdfeedback-migration-with-llms)
+  * [1.2 JavaMigration (SDFeedback): Migration with LLMs](#12-sdfeedback-migration-with-llms)
 - [2. 🤗 MigrationBench Datasets](#2--migrationbench-datasets)
 - [3. Code Migration with LLMs](#3-code-migration-with-llms)
   * [3.1 Single Job](#31-single-job)
     + [3.1.1 Basic Setup](#311-basic-setup)
-    + [3.1.2 Install MigrationBench and SDFeedback](#312-install-migrationbench-and-sdfeedback)
+    + [3.1.2 Install MigrationBench and JavaMigration (SDFeedback)](#312-install-migrationbench-and-sdfeedback)
     + [3.1.3 Local Run](#313-local-run)
   * [3.2 Batch Job](#32-batch-job)
     + [3.2.1 ~~Local Run~~](#321-local-run)
@@ -60,7 +60,7 @@ markdown-toc -i README.md
 
 ## 1. 📖 Overview
 
-[SDFeedback](https://github.com/amazon-science/SDFeedback)
+[JavaMigration (SDFeedback)](https://github.com/amazon-science/JavaMigration/tree/main/self_debug)
 is a library to conduct code migration with LLMs,
 and improves efficacy by providing feedback to LLMs as specific as possible,
 motivated by [Teaching Large Language Models to Self-Debug](https://arxiv.org/abs/2304.05128).
@@ -79,9 +79,9 @@ across multiple programming languages.
 is the **evaluation framework** to assess code migration success,
 from `java 8` to `17` or any other long-term support versions.
 
-### 1.2 [SDFeedback](https://github.com/amazon-science/SDFeedback): Migration with LLMs
+### 1.2 [JavaMigration (SDFeedback)](https://github.com/amazon-science/JavaMigration/tree/main/self_debug): Migration with LLMs
 
-[SDFeedback](https://github.com/amazon-science/SDFeedback)
+[JavaMigration (SDFeedback)](https://github.com/amazon-science/JavaMigration/tree/main/self_debug)
 (current package)
 is to conduct code migration with LLMs as a baseline solution,
 and it relies on the
@@ -145,13 +145,13 @@ $ conda --version
 conda 25.1.1
 ```
 
-#### 3.1.2 Install [SDFeedback](https://github.com/amazon-science/SDFeedback)
+#### 3.1.2 Install [JavaMigration (SDFeedback)](https://github.com/amazon-science/JavaMigration/tree/main/self_debug)
 
 **Option A: Using uv (Recommended)**
 
 ```bash
-git clone https://github.com/amazon-science/SDFeedback.git
-cd SDFeedback
+git clone https://github.com/amazon-science/JavaMigration.git
+cd JavaMigration/self_debug
 
 # Create and activate virtual environment with uv
 uv venv --python 3.9
@@ -164,18 +164,20 @@ uv pip install -e .
 uv pip install -e ".[dev]"
 ```
 
-**Option B: Using conda/pip**
+**Option B: Using conda**
 
 ```bash
-git clone https://github.com/amazon-science/SDFeedback.git
-cd SDFeedback
+git clone https://github.com/amazon-science/JavaMigration.git
+cd JavaMigration/self_debug
 
 # Optional: create a conda env
 # conda create -n sd-feedback python=3.9
 # conda activate sd-feedback
 
 # Install package (MigrationBench is installed automatically as a dependency)
-pip install -e .
+pip install -r requirements.txt -e .
+
+# conda deactivate
 ```
 
 #### 3.1.3 Local Run
@@ -183,7 +185,8 @@ pip install -e .
 To run code migration for a single repository:
 
 ```
-cd ~/SDFeedback/src/self_debug
+# cd .../JavaMigration/self_debug/
+cd src/self_debug/
 
 # Explicit `max_iteration` will override it in the `config_file`
 python run_self_debugging.py --config_file configs/java_config.pbtxt  # --max_iterations 3
@@ -214,7 +217,8 @@ Before submitting a job to EMRS, make sure you have the following ready:
 1. Build an ECR image
 
 ```
-cd ~/SDFeedback/src/self_debug/container
+# cd .../JavaMigration/self_debug/
+cd src/self_debug/container
 
 # To build ECR image: 552793110740.dkr.ecr.us-east-1.amazonaws.com/$USER:java
 ./image.sh java $USER 1 docker/java.Dockerfile  # 999999999999.dkr.ecr.us-west-2.amazonaws.com
@@ -225,7 +229,8 @@ cd ~/SDFeedback/src/self_debug/container
 Note that security keys might be subject to `12h` timeout.
 
 ```
-cd ~/SDFeedback/src/self_debug/batch
+# cd .../JavaMigration/self_debug/
+cd src/self_debug/batch
 
 # Update config file as needed for `emrs.py`, e.g. use the right ECR image in step `#1`
 CONFIG=...

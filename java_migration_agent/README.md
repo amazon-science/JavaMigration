@@ -52,22 +52,22 @@
 
 ## 1. Overview
 
-Java Migration Agent is a library for automated code migration from Java 8 to Java 17 using LLM-based agents built on the [Strands Agents](https://github.com/strands-agents/strands-agents) framework.
+Java Migration Agent is a library for automated code migration from Java 8 to Java 17 using LLM-based agents built on the [Strands Agents](https://github.com/strands-agents) framework.
 
 It provides multiple agent strategies for migration:
-- **Baseline**: Direct LLM-based migration
-- **PE (Prompt Engineering)**: Baseline with enhanced prompts for dependency updates
-- **RAG**: Uses retrieval-augmented generation for dependency version lookup
-- **Hybrid**: Pre-processes dependencies before LLM migration
+1. **Baseline**: Direct LLM-based migration
+1. **PE (Prompt Engineering)** (Baseline + PE): Baseline with enhanced prompts for dependency updates
+1. **RAG** (Baseline + PE + RAG): Uses retrieval-augmented generation for dependency version lookup
+1. **Hybrid** (Seed change, followed by baseline + PE): Pre-processes dependencies before LLM migration
 
 The agent relies on the [MigrationBench](https://github.com/amazon-science/MigrationBench) package for evaluation.
 
-## 2. [MigrationBench](https://huggingface.co/collections/AmazonScience/migrationbench-68125452fc21a4564b92b6c3) Datasets
+## 2. [🤗 MigrationBench](https://huggingface.co/collections/AmazonScience/migrationbench-68125452fc21a4564b92b6c3) Datasets
 
 | Index | Dataset                                       | Size  | Notes                                                                                               |
 |-------|-----------------------------------------------|-------|-----------------------------------------------------------------------------------------------------|
-| 1     | [AmazonScience/migration-bench-java-full](https://huggingface.co/datasets/AmazonScience/migration-bench-java-full)         | 5,102 | Each repo has a test directory or at least one test case                              |
-| 2     | [AmazonScience/migration-bench-java-selected](https://huggingface.co/datasets/AmazonScience/migration-bench-java-selected) |   300 | A **subset** of migration-bench-java-full                                          |
+| 1     | [🤗 AmazonScience/migration-bench-java-full](https://huggingface.co/datasets/AmazonScience/migration-bench-java-full)         | 5,102 | Each repo has a test directory or at least one test case                              |
+| 2     | [🤗 AmazonScience/migration-bench-java-selected](https://huggingface.co/datasets/AmazonScience/migration-bench-java-selected) |   300 | A **subset** of migration-bench-java-full                                          |
 
 ## 3. Installation
 
@@ -95,18 +95,25 @@ If you haven't done it yet, follow the instructions in [MigrationBench](https://
 ### 3.2 Install Package
 
 ```bash
-cd java_migration_agent
-pip install -e .
+# cd .../JavaMigration/
+
+cd java_migration_agent/
+pip install -r requirements.txt -e .
 ```
 
 Or with uv:
 
 ```bash
-cd java_migration_agent
+# cd .../JavaMigration/
+
+cd java_migration_agent/
 uv pip install -e .
 ```
 
 ## 4. Usage
+
+See the full binary script at [java_migration_agent/src/java_migration_agent/main.py](https://github.com/amazon-science/JavaMigration/blob/main/java_migration_agent/src/java_migration_agent/main.py).
+
 
 ### 4.1 Agent Types
 
@@ -133,16 +140,18 @@ python -m java_migration_agent \
 
 ### 4.3 Command Line Options
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--agent-type` | (required) | Agent type: `baseline`, `pe`, `rag`, or `hybrid` |
-| `--exp-id` | (required) | Experiment identifier for organizing results |
-| `--hf-dataset` | `AmazonScience/migration-bench-java-selected` | HuggingFace dataset name |
-| `--model-id` | `global.anthropic.claude-sonnet-4-5-20250929-v1:0` | Bedrock model ID |
-| `--temperature` | `1.0` | Model temperature |
-| `--max-messages` | `80` | Maximum messages per conversation |
-| `--max-workers` | `8` | Maximum parallel workers |
-| `--output-dir` | `./migration_results` | Output directory for results |
+
+| Flag   | Type | Default | Description |
+|--------|------|---------|-------------|
+| `--agent-type` | `str` | (required) | Agent type: `baseline`, `pe`, `rag`, or `hybrid` |
+| `--exp-id` | `str` | (required) | Experiment identifier for organizing results |
+| `--hf-dataset` | `str` | `AmazonScience/migration-bench-java-selected` | HuggingFace dataset name |
+| `--model-id` | `str` | `global.anthropic.claude-sonnet-4-5-20250929-v1:0` | Bedrock model ID |
+| `--temperature` | `float` | `1.0` | Model temperature |
+| `--max-messages` | `int`  | `80` | Maximum messages per conversation |
+| `--max-workers` | `int`  | `8` | Maximum parallel workers |
+| `--output-dir` | `str` | `./migration_results` | Output directory for results |
+
 
 ## 5. 📚 Citation
 ```bibtex

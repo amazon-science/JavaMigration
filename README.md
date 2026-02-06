@@ -34,17 +34,28 @@
   </tr>
 </table>
 
+
 🚀 Repository for automated Java code migration research, part of the [MigrationBench](https://huggingface.co/collections/AmazonScience/migrationbench-68125452fc21a4564b92b6c3) project.
+
 
 ## 📦 Packages
 
-This repository contains two main packages for Java code migration:
+This repository contains **two** sub-packages to conduct Java code migration with LLMs:
 
-### 🤖 [java_migration_agent](./java_migration_agent)
-LLM-based agent library for automated Java 8 to Java 17 migration, built on the [Strands Agents](https://strandsagents.com/latest/) framework. Supports multiple migration strategies including baseline, PE (prompt engineering), RAG, and hybrid approaches.
+### 1. 🤖 [JavaMigrationAgent](./java_migration_agent)
 
-### 🔧 [self_debug](./self_debug)
-SDFeedback implementation for code migration with LLMs using self-debugging feedback. Includes both single-job and batch processing capabilities with AWS EMRS support.
+[**JavaMigrationAgent**](./java_migration_agent) is an LLM-based agent to automate Java 8 to Java 17 (21) migration,
+built on top of the [Strands Agents](https://strandsagents.com/latest/) framework.
+
+- It supports multiple migration strategies including baseline, PE (prompt engineering), RAG, and a hybrid approach (More cost effective).
+
+### 2. 🔧 [SDFeedback](./self_debug)
+
+[**SDFeedback**](./self_debug) runs code migration implementation with LLMs by providing self debugging feedback,
+motivated by the [Teaching Large Language Models to Self-Debug](https://arxiv.org/abs/2304.05128) paper.
+
+- It includes both single-job and batch processing capabilities with AWS EMRS support.
+
 
 ## 📊 Data
 
@@ -52,9 +63,10 @@ Agent trajectories and execution results are stored in the `data/` folder.
 
 ## 🔗 Resources
 
-- 🤗 [MigrationBench (Hugging Face)](https://huggingface.co/collections/AmazonScience/migrationbench-68125452fc21a4564b92b6c3)
-- 💻 [MigrationBench (GitHub)](https://github.com/amazon-science/MigrationBench)
-- 📄 [arXiv Paper](https://arxiv.org/abs/2505.09569)
+1. 🤗 [MigrationBench (Hugging Face)](https://huggingface.co/collections/AmazonScience/migrationbench-68125452fc21a4564b92b6c3)
+1. 💻 [MigrationBench (GitHub)](https://github.com/amazon-science/MigrationBench)
+1. 📄 [arXiv Paper](https://arxiv.org/abs/2505.09569)
+
 
 ## 📚 Citation
 
